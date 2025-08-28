@@ -6,11 +6,19 @@
 <title>Sports - Entertainment Hub</title>
 <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 <style>
+/* Global */
 body {
   font-family: Arial, sans-serif;
   background: #f4f4f4;
   margin: 0;
 }
+h1 {
+  text-align: center;
+  color: #c8102e;
+  margin: 20px 0;
+}
+
+/* Navigation */
 nav ul {
   list-style: none;
   margin: 0;
@@ -18,26 +26,32 @@ nav ul {
   display: flex;
   justify-content: center;
   background: red;
+  flex-wrap: wrap;
+}
+nav li {
+  flex: 1;
+  text-align: center;
 }
 nav a {
   color: #fff;
-  padding: 15px 20px;
+  padding: 12px 15px;
   text-decoration: none;
   display: block;
+  font-size: 16px;
+  transition: .3s;
 }
 nav a:hover {
-  background: #555;
+  background: gold;
+  color: black;
 }
-h1 {
-  text-align: center;
-  color: #c8102e;
-  margin: 20px 0;
-}
+
+/* Tabs */
 .tabs {
   display: flex;
   justify-content: center;
-  gap: 5px;
+  gap: 8px;
   margin: 20px 0;
+  flex-wrap: wrap;
 }
 .tab-button {
   padding: 10px 20px;
@@ -46,10 +60,17 @@ h1 {
   color: #fff;
   border-radius: 4px;
   cursor: pointer;
+  transition: .3s;
 }
 .tab-button.active {
   background: #555;
 }
+.tab-button:hover {
+  background: gold;
+  color: black;
+}
+
+/* Tab content */
 .tab-content {
   display: none;
   opacity: 0;
@@ -67,12 +88,17 @@ h1 {
   display: block;
   opacity: 1;
 }
+.tab-content h2 {
+  color: #c8102e;
+}
+
+/* News blocks */
 .news-block {
   margin-bottom: 20px;
 }
 .news-block img {
   width: 100%;
-  max-height: 300px;
+  aspect-ratio: 16/9;
   object-fit: cover;
   border-radius: 8px;
 }
@@ -87,6 +113,26 @@ h1 {
 .news-block a:hover {
   text-decoration: underline;
 }
+.news-block small {
+  color: #444;
+}
+
+/* Sports background */
+.sports-background {
+  background: url('stadiumm.jpeg') no-repeat center center;
+  background-size: cover;
+  padding: 40px 0;
+  position: relative;
+}
+.sports-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4); 
+  z-index: 0;
+}
+
+/* Footer */
 footer {
   background: #000;
   color: #aaa;
@@ -98,7 +144,7 @@ footer h3 {
 }
 footer ul {
   list-style-type: none;
-  padding: 20px;
+  padding: 0;
 }
 footer a {
   color: #ccc;
@@ -114,19 +160,28 @@ footer a:hover {
   transform: scale(1.1);
 }
 
-
-.sports-background {
-  background: url('stadiumm.jpeg') no-repeat center center;
-  background-size: cover;
-  padding: 40px 0;
-  position: relative;
+/* Footer layout responsive */
+.footer-container {
+  display: grid;
+  gap: 20px;
 }
-.sports-background::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.4); 
-  z-index: 0;
+@media (min-width: 768px) {
+  .footer-container {
+    grid-template-columns: repeat(3, 1fr);
+    text-align: left;
+  }
+}
+
+/* Mobile tweaks */
+@media (max-width: 600px) {
+  nav a {
+    padding: 10px 8px;
+    font-size: 14px;
+  }
+  .tab-button {
+    flex: 1 1 40%;
+    margin: 5px 0;
+  }
 }
 </style>
 </head>
@@ -148,7 +203,7 @@ footer a:hover {
 <button class="tab-button active" onclick="switchTab(event,'football')">Football</button>
 <button class="tab-button" onclick="switchTab(event,'rugby')">Rugby</button>
 <button class="tab-button" onclick="switchTab(event,'netball')">Netball</button>
-<button class="tab-button active" onclick="switchTab(event,'games')">Games</button>
+<button class="tab-button" onclick="switchTab(event,'games')">Games</button>
 </div>
 
 <!-- Sports content with stadium background -->
@@ -168,12 +223,14 @@ footer a:hover {
       <p>The English Premier League returns with thrilling fixtures. Manchester United faces Arsenal in the opening weekend.</p>
       <small>Posted: Aug 3, 2025 | 2:15 PM</small>
     </div>
+
     <div class="news-block">
       <img src="Championsleague draw.jpeg" alt="Champions League">
       <h3><a href="UCLDRAW.html">UEFA Champions League Draw Revealed</a></h3>
       <p>Group B brings Real Madrid, Bayern, and PSG together for a thrilling showdown.</p>
       <small>Posted: Aug 2, 2025 | 6:45 PM</small>
     </div>
+
     <div class="news-block">
       <img src="afcon.jpeg" alt="AFCON 2025">
       <h3><a href="#">AFCON 2025 Set to Light Up North Africa</a></h3>
@@ -191,34 +248,37 @@ footer a:hover {
     <h2>Netball News</h2>
     <p>Netball tournaments, updates, and interviews.</p>
   </div>
-   <div id="games" class="tab-content" data-aos="fade-up">
+
+  <div id="games" class="tab-content" data-aos="fade-up">
     <h2>Game Updates</h2>
-    <p>interesting games</p>
+    <p>Interesting games</p>
   </div>
 </div>
 
 <footer>
-<div>
-<h3>Quick Links</h3>
-<ul>
-<li><a href="HOME.html">Home</a></li>
-<li><a href="#">Business</a></li>
-<li><a href="News.html">News</a></li>
-<li><a href="sports.html">Sports</a></li>
-<li><a href="#">Jobs</a></li>
-</ul>
-</div>
-<div>
-<h3>About Us</h3>
-<p>The Entertainment Hub brings trending news, sports, and business updates, celebrating entertainment and creativity in all its forms.</p>
-</div>
-<div>
-<h3>Contact Us</h3>
-<p>Email: support@entertainmenthub.com</p>
-<p>Phone: +256 785289731</p>
-<p>Address: Nebbi, Uganda</p>
-</div>
-<p>&copy; 2025 The Entertainment Hub. All rights reserved.</p>
+  <div class="footer-container">
+    <div>
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="HOME.html">Home</a></li>
+        <li><a href="#">Business</a></li>
+        <li><a href="News.html">News</a></li>
+        <li><a href="sports.html">Sports</a></li>
+        <li><a href="#">Jobs</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>About Us</h3>
+      <p>The Entertainment Hub brings trending news, sports, and business updates, celebrating entertainment and creativity in all its forms.</p>
+    </div>
+    <div>
+      <h3>Contact Us</h3>
+      <p>Email: support@entertainmenthub.com</p>
+      <p>Phone: +256 785289731</p>
+      <p>Address: Nebbi, Uganda</p>
+    </div>
+  </div>
+  <p>&copy; 2025 The Entertainment Hub. All rights reserved.</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
