@@ -5,18 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>News - Entertainment Hub</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Segoe UI', sans-serif;
       background: #f9f9f9;
       color: #333;
     }
 
+    /* Header */
     header {
       background: #c8102e;
       color: white;
@@ -26,153 +22,113 @@
       align-items: center;
       flex-wrap: wrap;
     }
-
-    header h1 a {
-      color: white;
-      text-decoration: none;
-      font-size: 1.8rem;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1rem;
-      margin: 0;
-      padding: 0;
-      flex-wrap: wrap;
-    }
-
+    header h1 a { color: white; text-decoration: none; font-size: 1.8rem; }
+    nav ul { list-style: none; display: flex; gap: 1rem; flex-wrap: wrap; }
     nav ul li a {
-      color: white;
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
+      color: white; text-decoration: none;
+      padding: 0.5rem 1rem; border-radius: 6px;
       transition: background 0.3s;
     }
+    nav ul li a:hover { background: rgba(255,255,255,0.2); }
 
-    nav ul li a:hover {
-      background: rgba(255,255,255,0.2);
+    /* Container */
+    .container { max-width: 1200px; margin: 2rem auto; padding: 1rem; }
+    h2 { text-align: center; margin-bottom: 2rem; color: #c8102e; font-size: 2rem; }
+
+    /* Featured News Section */
+    .featured {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
     }
-
-    .container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 1rem;
+    .featured-main {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
     }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 2rem;
+    .featured-main img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      display: block;
+    }
+    .featured-text {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.5rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+      color: #fff;
+    }
+    .featured-text h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .featured-side {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .side-card {
+      background: white;
+      padding: 0.8rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .side-card h4 {
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
       color: #c8102e;
-      font-size: 2rem;
     }
+    .side-card p { font-size: 0.9rem; color: #555; }
 
+    /* Grid News */
     .news-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
     }
-
     .news-card {
-      background: white;
-      border-radius: 10px;
-      overflow: hidden;
+      background: white; border-radius: 10px; overflow: hidden;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       transition: transform 0.3s, box-shadow 0.3s;
     }
-
     .news-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+      transform: translateY(-5px); box-shadow: 0 6px 14px rgba(0,0,0,0.15);
     }
-
     .news-card a img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      display: block;
-      border-radius: 0; /* inherit from parent container */
-      transition: transform 0.3s ease;
+      width: 100%; height: 180px; object-fit: cover; display: block;
     }
+    .news-content { padding: 1rem; }
+    .news-content h3 { margin-bottom: 0.6rem; color: #222; font-size: 1.1rem; }
+    .news-content p { font-size: 0.95rem; color: #666; line-height: 1.5; }
 
-    .news-card a:hover img,
-    .news-card a:focus img {
-      transform: scale(1.05);
-      outline: none;
-    }
-
-    .news-content {
-      padding: 1rem;
-    }
-
-    .news-content h3 {
-      margin-bottom: 0.6rem;
-      color: #222;
-      font-size: 1.1rem;
-    }
-
-    .news-content p {
-      font-size: 0.95rem;
-      color: #666;
-      line-height: 1.5;
-    }
-
-    .read-more {
-      display: inline-block;
-      margin-top: 0.8rem;
-      color: #c8102e;
-      font-weight: 600;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .read-more:hover,
-    .read-more:focus {
-      color: #9e0f24;
-      text-decoration: underline;
-      outline: none;
-    }
-
+    /* Footer */
     footer {
-      background: #1c1c1c;
-      color: #ccc;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 3rem;
-      font-size: 0.95rem;
+      background: #1c1c1c; color: #ccc; text-align: center;
+      padding: 1rem; margin-top: 3rem; font-size: 0.95rem;
     }
-
-    @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      nav ul {
-        flex-direction: column;
-        gap: 0.5rem;
-        margin-top: 1rem;
-      }
-    }
-     /* Footer nav hover effect */
     footer ul li a {
-      display: inline-block;
-      padding: 10px 15px;
-      color: #ccc;
+      display: inline-block; padding: 10px 15px; color: #ccc;
       text-decoration: none;
       transition: background-color 0.3s, transform 0.3s, color 0.3s;
     }
-
     footer ul li a:hover {
-      background-color: red;
-      transform: scale(1.20);
-      color: #ffd700;
-      border-radius: 10px;
+      background-color: red; transform: scale(1.20);
+      color: #ffd700; border-radius: 10px;
+    }
+
+    @media (max-width: 800px) {
+      .featured { grid-template-columns: 1fr; }
+      .featured-main img { height: 250px; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Header -->
   <header>
     <a href="index.html"><img src="EntertainmentHub Transparent.png" alt="EntertainmentHub Logo" style="width: 100px;"></a>
     <nav>
@@ -185,49 +141,74 @@
     </nav>
   </header>
 
+  <!-- Main Container -->
   <div class="container">
     <h2>📰 Latest News</h2>
 
-    <div class="news-grid">
-  <!-- News Card 1 -->
-  <div class="news-card">
-    <a href="ucc-full.html">
-      <img src="ucc.jpeg" alt="UCC Challenges Universities on Innovation">
-      <div class="news-content">
-        <h3>UCC Challenges Universities on Innovation</h3>
-        <p><em>The Uganda Communications Commission urges universities to focus on solving real-world issues through research-driven innovations...</em></p>
+    <!-- Featured Section -->
+    <div class="featured">
+      <!-- Main Featured Story -->
+      <div class="featured-main">
+        <a href="ucc-full.html">
+          <img src="ucc.jpeg" alt="UCC Challenges Universities on Innovation">
+          <div class="featured-text">
+            <h3>UCC Challenges Universities on Innovation</h3>
+            <p>The Uganda Communications Commission urges universities to focus on solving real-world issues through research-driven innovations.</p>
+          </div>
+        </a>
       </div>
-    </a>
-  </div>
 
-  <!-- News Card 2 -->
-  <div class="news-card">
-    <a href="norman-full.html">
-      <img src="Norman.webp" alt="British-Ugandan Filmmaker Launches Diaspora Media">
-      <div class="news-content">
-        <h3>British-Ugandan Filmmaker Launches Diaspora Media</h3>
-        <p><em>Norman Busigu is set to launch 'Postcards From The Diaspora' – a youth-led media platform connecting global African stories to home...</em></p>
+      <!-- Side Stories -->
+      <div class="featured-side">
+        <div class="side-card">
+          <h4><a href="norman-full.html" style="text-decoration:none; color:inherit;">British-Ugandan Filmmaker Launches Diaspora Media</a></h4>
+          <p>Norman Busigu is set to launch 'Postcards From The Diaspora' connecting global African stories to home...</p>
+        </div>
+        <div class="side-card">
+          <h4><a href="Unhcr full article.html" style="text-decoration:none; color:inherit;">UN Warns of Funding Shortage for Refugees</a></h4>
+          <p>The UN refugee agency (UNHCR) warns emergency refugee funding in Uganda may run out by Sept 2025...</p>
+        </div>
       </div>
-    </a>
-  </div>
-
-  <!-- News Card 3 -->
-  <div class="news-card">
-  <a href="Unhcr full article.html" class="news-link">
-    <img src="unhcr.avif" alt="UN Warns of Funding Shortage for Refugees in Uganda">
-    <div class="news-content">
-      <h3>UN Warns of Funding Shortage for Refugees in Uganda</h3>
-      <p><em>The UN refugee agency (UNHCR) has warned that emergency funding for refugees in Uganda will run out by September 2025 unless more financial support is received...</em></p>
     </div>
-  </a>
-</div>
 
-  
+    <!-- News Grid -->
+    <div class="news-grid">
+      <!-- Example news cards (you can keep adding more) -->
+      <div class="news-card">
+        <a href="ucc-full.html">
+          <img src="ucc.jpeg" alt="UCC Challenges Universities on Innovation">
+          <div class="news-content">
+            <h3>UCC Challenges Universities on Innovation</h3>
+            <p><em>The Uganda Communications Commission urges universities to focus on solving real-world issues...</em></p>
+          </div>
+        </a>
+      </div>
 
-   <footer style="align-items: center;">
+      <div class="news-card">
+        <a href="norman-full.html">
+          <img src="Norman.webp" alt="British-Ugandan Filmmaker Launches Diaspora Media">
+          <div class="news-content">
+            <h3>British-Ugandan Filmmaker Launches Diaspora Media</h3>
+            <p><em>Norman Busigu is set to launch 'Postcards From The Diaspora' – a youth-led media platform...</em></p>
+          </div>
+        </a>
+      </div>
+
+      <div class="news-card">
+        <a href="Unhcr full article.html">
+          <img src="unhcr.avif" alt="UN Warns of Funding Shortage for Refugees in Uganda">
+          <div class="news-content">
+            <h3>UN Warns of Funding Shortage for Refugees in Uganda</h3>
+            <p><em>The UN refugee agency (UNHCR) has warned that emergency funding for refugees in Uganda will run out...</em></p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
     <div style="max-width: 1000px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-around; gap: 40px;">
-
-      <!-- Navigation Links -->
       <div>
         <h3 style="color: #fff;">Quick Links</h3>
         <ul style="list-style: none; padding: 0;">
@@ -238,28 +219,21 @@
           <li><a href="#">Jobs</a></li>
         </ul>
       </div>
-
-      <!-- About Us -->
       <div>
         <h3 style="color: #fff;">About Us</h3>
         <p style="color: #ccc; max-width: 300px;">
           The Entertainment Hub is your go-to platform for trending breaking news updates, sports, and business updates. We celebrate entertainment and creativity in all its forms.
         </p>
       </div>
-
-      <!-- Contact Us -->
       <div>
         <h3 style="color: #fff;">Contact Us</h3>
         <p style="color: #ccc;">Email: support@entertainmenthub.com</p>
         <p style="color: #ccc;">Phone: +256 785289731</p>
         <p style="color: #ccc;">Address: Nebbi, Uganda</p>
       </div>
-
     </div>
-
     <hr style="margin: 30px auto; width: 80%; border: 1px solid #444;">
     <p style="color: #aaa;">&copy; 2025 The Entertainment Hub. All rights reserved.</p>
   </footer>
-
 </body>
 </html>
